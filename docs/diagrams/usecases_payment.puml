@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Gateway de Pagamento" as Payment
+
+rectangle "ClinicFlow SaaS" {
+    package "Financeiro" {
+        usecase "Realizar Pagamento" as UC_Payment
+        usecase "Gerenciar Cobranças" as UC_Billing
+    }
+}
+
+Payment --> UC_Payment
+
+@enduml

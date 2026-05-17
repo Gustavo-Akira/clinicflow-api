@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Administrador da Clínica" as Admin
+
+rectangle "ClinicFlow SaaS" {
+    package "Autenticação" {
+        usecase "Login" as UC_Login
+        usecase "Gerenciar Usuários" as UC_ManageUsers
+    }
+
+    package "Agendamento" {
+        usecase "Gerenciar Agenda" as UC_ManageSchedule
+    }
+
+    package "CRM de Pacientes" {
+        usecase "Gerenciar Pipeline" as UC_ManagePipeline
+        usecase "Consultar Conversão de Leads" as UC_LeadConversion
+    }
+
+    package "Financeiro" {
+        usecase "Gerenciar Cobranças" as UC_Billing
+    }
+
+    package "Analytics" {
+        usecase "Visualizar Dashboard" as UC_Dashboard
+        usecase "Consultar Conversão de Leads" as UC_LeadConversion2
+    }
+}
+
+Admin --> UC_Login
+Admin --> UC_ManageUsers
+Admin --> UC_ManageSchedule
+Admin --> UC_ManagePipeline
+Admin --> UC_Billing
+Admin --> UC_Dashboard
+Admin --> UC_LeadConversion
+
+@enduml

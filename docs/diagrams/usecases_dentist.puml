@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Dentista" as Dentist
+
+rectangle "ClinicFlow SaaS" {
+    package "Autenticação" {
+        usecase "Login" as UC_Login
+    }
+
+    package "Agendamento" {
+        usecase "Consultar Horários" as UC_ViewSchedule
+    }
+
+    package "Atendimento e Pós Consulta" {
+        usecase "Registrar Atendimento" as UC_RegisterAppointment
+        usecase "Consultar Histórico do Paciente" as UC_ViewHistory
+    }
+}
+
+Dentist --> UC_Login
+Dentist --> UC_ViewSchedule
+Dentist --> UC_RegisterAppointment
+Dentist --> UC_ViewHistory
+
+UC_RegisterAppointment .> UC_ViewHistory : <<include>>
+
+@enduml

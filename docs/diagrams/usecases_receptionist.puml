@@ -1,0 +1,37 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Recepcionista" as Receptionist
+
+rectangle "ClinicFlow SaaS" {
+    package "Autenticação" {
+        usecase "Login" as UC_Login
+    }
+
+    package "Agendamento" {
+        usecase "Consultar Horários" as UC_ViewSchedule
+        usecase "Agendar Consulta" as UC_BookAppointment
+        usecase "Gerenciar Agenda" as UC_ManageSchedule
+        usecase "Confirmar Consulta" as UC_ConfirmAppointment
+    }
+
+    package "CRM de Pacientes" {
+        usecase "Cadastrar Lead" as UC_CreateLead
+        usecase "Atualizar Status do Lead" as UC_UpdateLead
+        usecase "Consultar Histórico do Paciente" as UC_ViewHistory
+    }
+}
+
+Receptionist --> UC_Login
+Receptionist --> UC_BookAppointment
+Receptionist --> UC_ManageSchedule
+Receptionist --> UC_CreateLead
+Receptionist --> UC_UpdateLead
+Receptionist --> UC_ViewHistory
+Receptionist --> UC_ConfirmAppointment
+
+UC_BookAppointment .> UC_ViewSchedule : <<include>>
+UC_BookAppointment .> UC_ConfirmAppointment : <<include>>
+
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Paciente" as Patient
+
+rectangle "ClinicFlow SaaS" {
+
+    package "Catálogo e Landing Page" {
+        usecase "Visualizar Serviços" as UC_ViewServices
+        usecase "Visualizar Profissionais" as UC_ViewProfessionals
+        usecase "Solicitar Atendimento" as UC_RequestService
+    }
+
+    package "Agendamento" {
+        usecase "Consultar Horários" as UC_ViewSchedule
+        usecase "Agendar Consulta" as UC_BookAppointment
+        usecase "Reagendar Consulta" as UC_Reschedule
+        usecase "Cancelar Consulta" as UC_CancelAppointment
+        usecase "Confirmar Consulta" as UC_ConfirmAppointment
+    }
+
+    package "Financeiro" {
+        usecase "Realizar Pagamento" as UC_Payment
+    }
+}
+
+Patient --> UC_ViewServices
+Patient --> UC_ViewProfessionals
+Patient --> UC_RequestService
+Patient --> UC_ViewSchedule
+Patient --> UC_BookAppointment
+Patient --> UC_Reschedule
+Patient --> UC_CancelAppointment
+Patient --> UC_Payment
+
+UC_BookAppointment .> UC_ViewSchedule : <<include>>
+UC_BookAppointment .> UC_ConfirmAppointment : <<include>>
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "WhatsApp Provider" as WhatsApp
+
+rectangle "ClinicFlow SaaS" {
+    package "Atendimento e Pós Consulta" {
+        usecase "Registrar Atendimento" as UC_RegisterAppointment
+        usecase "Enviar Lembrete" as UC_SendReminder
+        usecase "Enviar Follow-up" as UC_SendFollowup
+        usecase "Solicitar Avaliação" as UC_RequestReview
+    }
+}
+
+WhatsApp --> UC_SendReminder
+WhatsApp --> UC_SendFollowup
+WhatsApp --> UC_RequestReview
+
+UC_SendFollowup .> UC_RegisterAppointment : <<extend>>
+UC_RequestReview .> UC_RegisterAppointment : <<extend>>
+UC_RegisterAppointment .> UC_ViewHistory : <<include>>
+
+@enduml
