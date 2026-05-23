@@ -1,0 +1,9 @@
+.gradle/
+build/
+out/
+*.iml
+.idea/
+.vscode/
+.env
+/.mvn/
+!gradle/wrapper/gradle-wrapper.jar
